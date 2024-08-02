@@ -1,10 +1,14 @@
 package sv.edu.udb.desafio1.faces;
 
-import jakarta.annotation.ManagedBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
+import sv.edu.udb.desafio1.model.EstudianteDAO;
+
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -18,6 +22,7 @@ public class EstudianteBean implements Serializable {
     private Date fechaNacimiento;
     private String telefono;
     private Boolean sexo;
+    private List<EstudianteBean> estudiantes = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -35,11 +40,11 @@ public class EstudianteBean implements Serializable {
         this.dui = dui;
     }
 
-    public String getnombreCompleto() {
+    public String getNombreCompleto() {
         return nombreCompleto;
     }
 
-    public void setnombreCompleto(String nombreCompleto) {
+    public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
     }
 
@@ -83,8 +88,31 @@ public class EstudianteBean implements Serializable {
         this.sexo = sexo;
     }
 
-    public void submit() {
+    public List<EstudianteBean> getEstudiantes() {
+        return estudiantes;
+    }
 
+    public void submit() throws SQLException {
+        EstudianteDAO estudianteDAO = new EstudianteDAO();
+        estudianteDAO.insertarEstudiante(this);
+        cargarEstudiantes();
+        resetForm();
+    }
+
+    private void cargarEstudiantes() throws SQLException {
+        EstudianteDAO estudianteDAO = new EstudianteDAO();
+        this.estudiantes = estudianteDAO.obtenerEstudiantes();
+    }
+
+    private void resetForm() {
+        this.id = 0;
+        this.dui = "";
+        this.nombreCompleto = "";
+        this.direccion = "";
+        this.email = "";
+        this.fechaNacimiento = null;
+        this.telefono = "";
+        this.sexo = null;
     }
 
 }

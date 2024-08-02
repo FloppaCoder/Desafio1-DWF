@@ -26,6 +26,11 @@ public class AppConnection {
 
 	public void connect() throws SQLException{
 		conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		if (conn != null) {
+			System.out.println("Conexión exitosa a la base de datos.");
+		} else {
+			System.out.println("Conexión fallida.");
+		}
 	}
 	public void close() throws SQLException{
 		if(conn != null){

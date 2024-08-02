@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: marce
-  Date: 30/7/2024
-  Time: 17:43
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-    <title>Title</title>
+    <title>Formulario de Ingreso de Estudiantes</title>
 </h:head>
-
 <h:body>
+    <h2>Formulario de Ingreso de Estudiante</h2>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="dui" value="Identificación (DUI):" />
+            <h:inputText id="dui" value="#{estudianteBean.dui}" />
 
+            <h:outputLabel for="nombreCompleto" value="Nombre Completo:" />
+            <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" />
+
+            <h:outputLabel for="direccion" value="Dirección:" />
+            <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" />
+
+            <h:outputLabel for="email" value="Email:" />
+            <h:inputText id="email" value="#{estudianteBean.email}" />
+
+            <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
+            <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:inputText>
+
+            <h:outputLabel for="telefono" value="Teléfono:" />
+            <h:inputText id="telefono" value="#{estudianteBean.telefono}" />
+
+            <h:outputLabel for="sexo" value="Sexo:" />
+            <h:selectOneMenu id="sexo" value="#{estudianteBean.sexo}">
+                <f:selectItem itemValue="true" itemLabel="Masculino"/>
+                <f:selectItem itemValue="false" itemLabel="Femenino"/>
+            </h:selectOneMenu>
+
+            <h:commandButton value="Guardar" action="#{estudianteBean.submit}" />
+        </h:panelGrid>
+    </h:form>
+
+    <h2>Lista de Estudiantes</h2>
+    <h:dataTable value="#{estudianteBean.estudiantes}" var="estudiante">
+        <h:column>
+            <f:facet name="header">DUI</f:facet>
+            #{estudiante.dui}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Nombre Completo</f:facet>
+            #{estudiante.nombreCompleto}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Dirección</f:facet>
+            #{estudiante.direccion}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Email</f:facet>
+            #{estudiante.email}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Fecha de Nacimiento</f:facet>
+            <h:outputText value="#{estudiante.fechaNacimiento}">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Teléfono</f:facet>
+            #{estudiante.telefono}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Sexo</f:facet>
+            #{estudiante.sexo ? 'Masculino' : 'Femenino'}
+        </h:column>
+    </h:dataTable>
 </h:body>
-
 </html>
