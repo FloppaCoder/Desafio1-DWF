@@ -1,5 +1,6 @@
 package sv.edu.udb.desafio1.faces;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import sv.edu.udb.desafio1.model.EstudianteDAO;
@@ -97,6 +98,15 @@ public class EstudianteBean implements Serializable {
         estudianteDAO.insertarEstudiante(this);
         cargarEstudiantes();
         resetForm();
+    }
+
+    @PostConstruct
+    public void init() {
+        try {
+            cargarEstudiantes();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void cargarEstudiantes() throws SQLException {
