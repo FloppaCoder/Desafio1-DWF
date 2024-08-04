@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>Formulario de Ingreso de Estudiantes</title>
@@ -29,34 +30,35 @@
             <h:panelGrid columns="1" styleClass="w-full">
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="dui" value="Identificación (DUI):" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="dui" value="#{estudianteBean.dui}" styleClass="border rounded p-2 flex-grow" />
+                    <h:inputText id="dui" value="#{estudianteBean.dui}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 12345678-9" required="true" requiredMessage="• Por favor ingrese su DUI">
+                    </h:inputText>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="nombreCompleto" value="Nombre Completo:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" styleClass="border rounded p-2 flex-grow" />
+                    <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Nombre Completo separado por espacios" required="true" requiredMessage="• Por favor ingrese su Nombre Completo"/>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="direccion" value="Dirección:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" />
+                    <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" a:placeholder="Digite su Dirección" required="true" requiredMessage="• Por favor ingrese su Dirección"/>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="email" value="Email:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="email" value="#{estudianteBean.email}" styleClass="border rounded p-2 flex-grow" />
+                    <h:inputText id="email" value="#{estudianteBean.email}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Correo Electrónico" required="true" requiredMessage="• Por favor ingrese su Email"/>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}" styleClass="border rounded p-2 flex-grow">
+                    <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 2006-08-19" required="true" requiredMessage="• Por favor ingrese su Fecha de Nacimiento">
                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                     </h:inputText>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="telefono" value="Teléfono:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="telefono" value="#{estudianteBean.telefono}" styleClass="border rounded p-2 flex-grow" />
+                    <h:inputText id="telefono" value="#{estudianteBean.telefono}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 1234-5678" required="true" requiredMessage="• Por favor ingrese su Número de Teléfono"/>
                 </h:panelGroup>
 
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
@@ -71,6 +73,9 @@
                     <h:commandButton value="Guardar" action="#{estudianteBean.submit}" styleClass="bg-blue-500 text-white py-2 px-5 rounded w-60" />
                 </h:panelGroup>
             </h:panelGrid>
+
+            <!-- Mensajes de error -->
+            <h:messages styleClass="text-red-500 mt-4" />
         </h:form>
 
     </div>
