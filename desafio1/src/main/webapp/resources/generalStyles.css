@@ -1,0 +1,15 @@
+#tableContainer table th {
+    background-color: #4a5568;
+    text-align: center;
+    color: white;
+    padding: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+#tableContainer table tr:nth-child(even) {
+    background-color: #bdc3c7;
+}
+
+#tableContainer table tr:nth-child(odd) {
+    background-color: white;
+}

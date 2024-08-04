@@ -6,73 +6,114 @@
 
 <h:head>
     <title>Formulario de Ingreso de Estudiantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="resources/udb.png" />
+    <link rel="stylesheet" href="resources/generalStyles.css" />
 </h:head>
-<h:body>
-    <h2>Formulario de Ingreso de Estudiante</h2>
-    <h:form>
-        <h:panelGrid columns="2">
-            <h:outputLabel for="dui" value="Identificación (DUI):" />
-            <h:inputText id="dui" value="#{estudianteBean.dui}" />
+<h:body class="bg-gray-100">
+    <!-- Navbar -->
+    <div class="bg-gray-800 text-white p-4 mb-10 flex justify-between items-center">
 
-            <h:outputLabel for="nombreCompleto" value="Nombre Completo:" />
-            <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" />
+        <div class="flex items-center">
+            <img src="resources/udb.png" alt="icon" class="h-20 w-20 w-8 mr-2" />
+        </div>
 
-            <h:outputLabel for="direccion" value="Dirección:" />
-            <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" />
+        <div class="flex-grow text-right">
+            <h:outputText value="Desafío práctico #1 | DWF" styleClass="text-xl font-semibold" />
+        </div>
+    </div>
 
-            <h:outputLabel for="email" value="Email:" />
-            <h:inputText id="email" value="#{estudianteBean.email}" />
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-center">Formulario de Ingreso de Estudiante</h2>
+        <h:form>
+            <h:panelGrid columns="1" styleClass="w-full">
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="dui" value="Identificación (DUI):" styleClass="font-semibold w-44 px-2" />
+                    <h:inputText id="dui" value="#{estudianteBean.dui}" styleClass="border rounded p-2 flex-grow" />
+                </h:panelGroup>
 
-            <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
-            <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}">
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
-            </h:inputText>
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="nombreCompleto" value="Nombre Completo:" styleClass="font-semibold w-44 px-2" />
+                    <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" styleClass="border rounded p-2 flex-grow" />
+                </h:panelGroup>
 
-            <h:outputLabel for="telefono" value="Teléfono:" />
-            <h:inputText id="telefono" value="#{estudianteBean.telefono}" />
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="direccion" value="Dirección:" styleClass="font-semibold w-44 px-2" />
+                    <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" />
+                </h:panelGroup>
 
-            <h:outputLabel for="sexo" value="Sexo:" />
-            <h:selectOneMenu id="sexo" value="#{estudianteBean.sexo}">
-                <f:selectItem itemValue="true" itemLabel="Masculino"/>
-                <f:selectItem itemValue="false" itemLabel="Femenino"/>
-            </h:selectOneMenu>
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="email" value="Email:" styleClass="font-semibold w-44 px-2" />
+                    <h:inputText id="email" value="#{estudianteBean.email}" styleClass="border rounded p-2 flex-grow" />
+                </h:panelGroup>
 
-            <h:commandButton value="Guardar" action="#{estudianteBean.submit}" />
-        </h:panelGrid>
-    </h:form>
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" styleClass="font-semibold w-44 px-2" />
+                    <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}" styleClass="border rounded p-2 flex-grow">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:inputText>
+                </h:panelGroup>
 
-    <h2>Lista de Estudiantes</h2>
-    <h:dataTable value="#{estudianteBean.estudiantes}" var="estudiante">
-        <h:column>
-            <f:facet name="header">DUI</f:facet>
-            #{estudiante.dui}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Nombre Completo</f:facet>
-            #{estudiante.nombreCompleto}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Dirección</f:facet>
-            #{estudiante.direccion}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Email</f:facet>
-            #{estudiante.email}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Fecha de Nacimiento</f:facet>
-            <h:outputText value="#{estudiante.fechaNacimiento}">
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
-            </h:outputText>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Teléfono</f:facet>
-            #{estudiante.telefono}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Sexo</f:facet>
-            #{estudiante.sexo ? 'Masculino' : 'Femenino'}
-        </h:column>
-    </h:dataTable>
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="telefono" value="Teléfono:" styleClass="font-semibold w-44 px-2" />
+                    <h:inputText id="telefono" value="#{estudianteBean.telefono}" styleClass="border rounded p-2 flex-grow" />
+                </h:panelGroup>
+
+                <h:panelGroup layout="block" styleClass="flex items-center w-full">
+                    <h:outputLabel for="sexo" value="Sexo:" styleClass="font-semibold w-44 px-2" />
+                    <h:selectOneMenu id="sexo" value="#{estudianteBean.sexo}" styleClass="border rounded px-4 p-2 w-1/2">
+                        <f:selectItem itemValue="true" itemLabel="Masculino"/>
+                        <f:selectItem itemValue="false" itemLabel="Femenino"/>
+                    </h:selectOneMenu>
+                </h:panelGroup>
+
+                <h:panelGroup layout="block" styleClass="flex items-center justify-center w-full mt-4">
+                    <h:commandButton value="Guardar" action="#{estudianteBean.submit}" styleClass="bg-blue-500 text-white py-2 px-5 rounded w-60" />
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+
+    </div>
+
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md mt-8 mb-10" id="tableContainer">
+        <h2 class="text-2xl font-bold mb-4 text-center">Listado de Estudiantes</h2>
+        <h:dataTable value="#{estudianteBean.estudiantes}" var="estudiante" styleClass="w-full text-left border-collapse">
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">DUI</f:facet>
+                <span class="py-2 block">#{estudiante.dui}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Nombre Completo</f:facet>
+                <span class="py-2 block">#{estudiante.nombreCompleto}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Dirección</f:facet>
+                <span class="py-2 block">#{estudiante.direccion}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Email</f:facet>
+                <span class="py-2 block">#{estudiante.email}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Fecha de Nacimiento</f:facet>
+                <h:outputText value="#{estudiante.fechaNacimiento}" styleClass="py-2 block">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Teléfono</f:facet>
+                <span class="py-2 block">#{estudiante.telefono}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Sexo</f:facet>
+                <span class="py-2 block">#{estudiante.sexo ? 'Masculino' : 'Femenino'}</span>
+            </h:column>
+            <h:column>
+                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Sexo</f:facet>
+                <span class="py-2 block">#{estudiante.sexo ? 'Masculino' : 'Femenino'}</span>
+            </h:column>
+        </h:dataTable>
+    </div>
+
 </h:body>
 </html>
