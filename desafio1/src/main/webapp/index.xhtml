@@ -28,39 +28,66 @@
         <h2 class="text-2xl font-bold mb-4 text-center">Formulario de Ingreso de Estudiante</h2>
         <h:form>
             <h:panelGrid columns="1" styleClass="w-full">
+
+                <!-- DUI -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="dui" value="Identificación (DUI):" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="dui" value="#{estudianteBean.dui}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 12345678-9" required="true" requiredMessage="• Por favor ingrese su DUI">
+                    <h:inputText id="dui" value="#{estudianteBean.dui}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 12345678-9"
+                                 required="true" requiredMessage="• Por favor ingrese su DUI" validatorMessage="• Formato de DUI incorrecto, ingrese un DUI valido"> <!-- Usando validatorMessage -->
+                        <f:validateRegex pattern="^\d{8}-\d$"/>
                     </h:inputText>
+                    <h:message for="dui" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Nombre Completo -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="nombreCompleto" value="Nombre Completo:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Nombre Completo separado por espacios" required="true" requiredMessage="• Por favor ingrese su Nombre Completo"/>
+                    <h:inputText id="nombreCompleto" value="#{estudianteBean.nombreCompleto}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Nombre Completo separado por espacios"
+                                 required="true" requiredMessage="• Por favor ingrese su Nombre Completo" validatorMessage="• Ingrese sus dos nombres y dos apellidos separados por espacios"> <!-- Usando validatorMessage -->
+                        <f:validateRegex pattern="^\b\w+\b\s\b\w+\b\s\b\w+\b\s\b\w+\b$"/>
+                    </h:inputText>
+                    <h:message for="nombreCompleto" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Dirección -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="direccion" value="Dirección:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" a:placeholder="Digite su Dirección" required="true" requiredMessage="• Por favor ingrese su Dirección"/>
+                    <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" a:placeholder="Digite su Dirección"
+                                     required="true" requiredMessage="• Por favor ingrese su Dirección"/> <!-- Usando requiredMessage -->
+                    <h:message for="direccion" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Email -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="email" value="Email:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="email" value="#{estudianteBean.email}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Correo Electrónico" required="true" requiredMessage="• Por favor ingrese su Email"/>
+                    <h:inputText id="email" value="#{estudianteBean.email}" styleClass="border rounded p-2 flex-grow" a:placeholder="Digite su Correo Electrónico"
+                                 required="true" requiredMessage="• Por favor ingrese su Email" validatorMessage="• Ingrese un correo electrónico válido"> <!-- Usando validatorMessage -->
+                        <f:validateRegex pattern="^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}$"/>
+                    </h:inputText>
+                    <h:message for="email" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Fecha de Nacimiento -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 2006-08-19" required="true" requiredMessage="• Por favor ingrese su Fecha de Nacimiento">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    <h:inputText id="fechaNacimiento" value="#{estudianteBean.fechaNacimiento}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 2006-08-19"
+                                 required="true" requiredMessage="• Por favor ingrese su Fecha de Nacimiento" converterMessage="• La fecha debe tener el formato Año-Mes-Dia"> <!-- Usando converterMessage -->
+                        <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT"/>
                     </h:inputText>
+                    <h:message for="fechaNacimiento" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Teléfono -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="telefono" value="Teléfono:" styleClass="font-semibold w-44 px-2" />
-                    <h:inputText id="telefono" value="#{estudianteBean.telefono}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 1234-5678" required="true" requiredMessage="• Por favor ingrese su Número de Teléfono"/>
+                    <h:inputText id="telefono" value="#{estudianteBean.telefono}" styleClass="border rounded p-2 flex-grow" a:placeholder="Ej: 1234-5678"
+                                 required="true" requiredMessage="• Por favor ingrese su Número de Teléfono" validatorMessage="• El número de teléfono debe tener el formato 1234-5678"> <!-- Usando validatorMessage -->
+                        <f:validateRegex pattern="^\d{4}-\d{4}$"/>
+                    </h:inputText>
+                    <h:message for="telefono" styleClass="text-red-500" />
                 </h:panelGroup>
 
+                <!-- Sexo -->
                 <h:panelGroup layout="block" styleClass="flex items-center w-full">
                     <h:outputLabel for="sexo" value="Sexo:" styleClass="font-semibold w-44 px-2" />
                     <h:selectOneMenu id="sexo" value="#{estudianteBean.sexo}" styleClass="border rounded px-4 p-2 w-1/2">
