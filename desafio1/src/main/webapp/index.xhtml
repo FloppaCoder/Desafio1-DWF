@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" href="resources/udb.png" />
     <link rel="stylesheet" href="resources/generalStyles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </h:head>
 <h:body class="bg-gray-100">
     <!-- Navbar -->
@@ -27,6 +28,16 @@
     <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-4 text-center">Formulario de Ingreso de Estudiante</h2>
         <h:form>
+            <!-- Mensajes de error -->
+            <h:panelGroup rendered="#{not empty facesContext.maximumSeverity}" styleClass="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-4 relative flex items-center"  role="alert">
+                <div>
+                    <i class="fas fa-times text-red-500 mr-2" /><strong class="font-bold">¡Oops! Ha ocurrido un error:</strong>
+                    <ul class="mt-2 ml-4 list-disc">
+                        <h:messages layout="list" errorClass="list-item" fatalClass="list-item" />
+                    </ul>
+                </div>
+            </h:panelGroup>
+
             <h:panelGrid columns="1" styleClass="w-full">
 
                 <!-- DUI -->
@@ -36,7 +47,6 @@
                                  required="true" requiredMessage="• Por favor ingrese su DUI" validatorMessage="• Formato de DUI incorrecto, ingrese un DUI valido"> <!-- Usando validatorMessage -->
                         <f:validateRegex pattern="^\d{8}-\d$"/>
                     </h:inputText>
-                    <h:message for="dui" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Nombre Completo -->
@@ -46,7 +56,6 @@
                                  required="true" requiredMessage="• Por favor ingrese su Nombre Completo" validatorMessage="• Ingrese sus dos nombres y dos apellidos separados por espacios"> <!-- Usando validatorMessage -->
                         <f:validateRegex pattern="^\b\w+\b\s\b\w+\b\s\b\w+\b\s\b\w+\b$"/>
                     </h:inputText>
-                    <h:message for="nombreCompleto" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Dirección -->
@@ -54,7 +63,6 @@
                     <h:outputLabel for="direccion" value="Dirección:" styleClass="font-semibold w-44 px-2" />
                     <h:inputTextarea id="direccion" value="#{estudianteBean.direccion}" styleClass="border rounded p-2 flex-grow" style="resize: none;" a:placeholder="Digite su Dirección"
                                      required="true" requiredMessage="• Por favor ingrese su Dirección"/> <!-- Usando requiredMessage -->
-                    <h:message for="direccion" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Email -->
@@ -64,7 +72,6 @@
                                  required="true" requiredMessage="• Por favor ingrese su Email" validatorMessage="• Ingrese un correo electrónico válido"> <!-- Usando validatorMessage -->
                         <f:validateRegex pattern="^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}$"/>
                     </h:inputText>
-                    <h:message for="email" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Fecha de Nacimiento -->
@@ -74,7 +81,6 @@
                                  required="true" requiredMessage="• Por favor ingrese su Fecha de Nacimiento" converterMessage="• La fecha debe tener el formato Año-Mes-Dia"> <!-- Usando converterMessage -->
                         <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT"/>
                     </h:inputText>
-                    <h:message for="fechaNacimiento" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Teléfono -->
@@ -84,7 +90,6 @@
                                  required="true" requiredMessage="• Por favor ingrese su Número de Teléfono" validatorMessage="• El número de teléfono debe tener el formato 1234-5678"> <!-- Usando validatorMessage -->
                         <f:validateRegex pattern="^\d{4}-\d{4}$"/>
                     </h:inputText>
-                    <h:message for="telefono" styleClass="text-red-500" />
                 </h:panelGroup>
 
                 <!-- Sexo -->
@@ -101,15 +106,13 @@
                 </h:panelGroup>
             </h:panelGrid>
 
-            <!-- Mensajes de error -->
-            <h:messages styleClass="text-red-500 mt-4" />
         </h:form>
 
     </div>
 
     <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md mt-8 mb-10" id="tableContainer">
         <h2 class="text-2xl font-bold mb-4 text-center">Listado de Estudiantes</h2>
-        <h:dataTable value="#{estudianteBean.estudiantes}" var="estudiante" styleClass="w-full text-left border-collapse">
+        <h:dataTable value="#{estudianteBean.estudiantes}" var="estudiante" styleClass="w-full text-left border-collapse custom-table">
             <h:column>
                 <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">DUI</f:facet>
                 <span class="py-2 block">#{estudiante.dui}</span>
@@ -140,12 +143,9 @@
                 <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Sexo</f:facet>
                 <span class="py-2 block">#{estudiante.sexo ? 'Masculino' : 'Femenino'}</span>
             </h:column>
-            <h:column>
-                <f:facet name="header" styleClass="bg-gray-800 text-white border-b-2 border-gray-200 py-2">Sexo</f:facet>
-                <span class="py-2 block">#{estudiante.sexo ? 'Masculino' : 'Femenino'}</span>
-            </h:column>
         </h:dataTable>
     </div>
+
 
 </h:body>
 </html>

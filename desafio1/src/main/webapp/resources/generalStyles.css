@@ -6,8 +6,12 @@
     border-bottom: 2px solid #e2e8f0;
 }
 
+#tableContainer table tr{
+    text-align: center;
+}
+
 #tableContainer table tr:nth-child(even) {
-    background-color: #bdc3c7;
+    background-color: #dcdde1;
 }
 
 #tableContainer table tr:nth-child(odd) {
